@@ -125,6 +125,33 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
+  # Here is the section for defining the database server, which I have
+  # named "dbserver".
+  config.vm.define "adminserver" do |adminserver|
+    dbserver.vm.hostname = "adminserver"
+    # Note that the IP address is different from that of the webserver
+    # above: it is important that no two VMs attempt to use the same
+    # IP address on the private_network.
+    dbserver.vm.network "private_network", ip: "192.168.2.13"
+    dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    
+    dbserver.vm.provision "shell", inline: <<-SHELL
+      # Update Ubuntu software packages.
+      apt-get update
+      apt-get install -y apache2 php libapache2-mod-php php-mysql
+            
+      # Change VM's webserver's configuration to use shared folder.
+      # (Look inside test-website.conf for specifics.)
+      cp /vagrant/test-website.conf /etc/apache2/sites-available/
+      # activate our website configuration ...
+      a2ensite test-website
+      # ... and disable the default website provided with Apache
+      a2dissite 000-default
+      # Reload the webserver configuration, to pick up our changes
+      service apache2 reload
+    SHELL
+  end
+
 end
 
 #  LocalWords:  webserver xenial64
