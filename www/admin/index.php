@@ -18,6 +18,12 @@ th, td {
 <body>
 <h1>Database test page</h1>
 
+<form action="welcome.php" method="post">
+Paper Code: <input type="text" name="code"><br>
+Paper Name: <input type="text" name="name"><br>
+<input type="submit">
+</form>
+
 <p>Showing contents of papers table:</p>
 
 <table border="1">
@@ -25,16 +31,9 @@ th, td {
 
 <?php
  
-$db_host   = '192.168.2.12';
-$db_name   = 'fvision';
-$db_user   = 'webuser';
-$db_passwd = 'insecure_db_pw';
+include('../dbconnection.php');
 
-$pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
-$pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-
-$q = $pdo->query("SELECT * FROM papers");
+$q = $connection->query("SELECT * FROM papers");
 
 while($row = $q->fetch()){
   echo "<tr><td>".$row["code"]."</td><td>".$row["name"]."</td></tr>\n";
