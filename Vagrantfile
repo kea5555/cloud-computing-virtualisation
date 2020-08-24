@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   # called this first VM "webserver" since I intend it to run the
   # webserver (unsurprisingly...).
   config.vm.define "webserver" do |webserver|
-    
+
     # These are options specific to the webserver VM
     webserver.vm.hostname = "webserver"
     
@@ -51,6 +51,23 @@ Vagrant.configure("2") do |config|
     
     # Link to the file that contains the shell commands
     dbserver.vm.provision "shell", path: "dbserver.sh"
+  end
+
+  # Here is the section for defining the admin server, which I have
+  # named "admin".
+  config.vm.define "admin" do |admin|
+
+    # The name of the server
+    dbserver.vm.hostname = "admin"
+
+    # The VMs ip address
+    dbserver.vm.network "private_network", ip: "192.168.2.13"
+
+    # This is needed if the project is being run on lab computers
+    dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    
+    # Link to the file that contains the shell commands
+    dbserver.vm.provision "shell", path: "admin.sh"
   end
 
 end
