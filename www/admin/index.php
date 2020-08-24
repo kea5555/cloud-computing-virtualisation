@@ -18,9 +18,16 @@ th, td {
 <body>
 <h1>Database test page</h1>
 
-<form action="welcome.php" method="post">
-Paper Code: <input type="text" name="code"><br>
+<h3> Add a paper </h3>
+<form action="addPaper.php" method="post">
+Paper Code: <input type="text" name="add_code"><br>
 Paper Name: <input type="text" name="name"><br>
+<input type="submit">
+</form>
+
+<h3> Delete a paper </h3>
+<form action="deletePaper.php" method="post">
+Paper Code: <input type="text" name="delete_code"><br>
 <input type="submit">
 </form>
 
