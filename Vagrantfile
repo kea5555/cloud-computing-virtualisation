@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     # labs, but recall that it means that our host computer can
     # connect to IP address 127.0.0.1 port 8081, and that network
     # request will reach our webserver VM's port 80.
-    webserver.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
+    webserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
     
     # The VMs ip address
     webserver.vm.network "private_network", ip: "192.168.2.11"
@@ -59,7 +59,7 @@ Vagrant.configure("2") do |config|
     # labs, but recall that it means that our host computer can
     # connect to IP address 127.0.0.1 port 8081, and that network
     # request will reach our webserver VM's port 80.
-    #webserver.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
+    admin.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
 
     # The VMs ip address
     admin.vm.network "private_network", ip: "192.168.2.13"
