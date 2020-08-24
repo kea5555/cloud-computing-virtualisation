@@ -1,52 +1,32 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<!DOCTYPE html>
 <html>
-<head><title>Database test page</title>
-<style>
-th { text-align: left; }
-
-table, th, td {
-  border: 2px solid grey;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 0.2em;
-}
-</style>
-</head>
-
-<body>
-<h1>Database test page</h1>
-
-<h3> Add a paper </h3>
-<form action="addPaper.php" method="post">
-Paper Code: <input type="text" name="add_code"><br>
-Paper Name: <input type="text" name="name"><br>
-<input type="submit">
-</form>
-
-<h3> Delete a paper </h3>
-<form action="deletePaper.php" method="post">
-Paper Code: <input type="text" name="delete_code"><br>
-<input type="submit">
-</form>
-
-<p>Showing contents of papers table:</p>
-
-<table border="1">
-<tr><th>Paper code</th><th>Paper name</th></tr>
-
-<?php
- 
-include('../dbconnection.php');
-
-$q = $connection->query("SELECT * FROM papers");
-
-while($row = $q->fetch()){
-  echo "<tr><td>".$row["code"]."</td><td>".$row["name"]."</td></tr>\n";
-}
-
-?>
-</table>
-</body>
+    <body>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half is-offset-one-quarter has-text-centered" id="login-column">
+                    <h1 class="title">Newletter</h1>
+                    <form action = "" method = "post">
+                        <div class="field">
+                          <p class="control">
+                            <input class="input" type="text" name="username" placeholder="Username">
+                          </p>
+                        </div>
+                        <div class="field">
+                          <p class="control">
+                            <input class="input" type="password" name="password" id="password" placeholder="Password">
+                          </p>
+                        </div>
+                        <div class="field">
+                          <p class="control">
+                            <input class="button is-success" type="submit" value="Submit" id="login-button">
+                          </p>
+                        </div>
+                    </form>
+                    <div id="error">
+                        <?php echo $error; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

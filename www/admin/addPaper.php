@@ -13,7 +13,7 @@ $name = $_POST["name"];
 
 $q = "INSERT INTO papers(code, name) VALUES('$code','$name')";
 
-$connection->query($q);
+$db->query($q);
 
 ?>
 

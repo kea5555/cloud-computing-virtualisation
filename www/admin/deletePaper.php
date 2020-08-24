@@ -11,7 +11,7 @@ $code = $_POST["delete_code"];
 
 $q = "DELETE FROM papers WHERE code='$code'";
 
-$connection->query($q);
+$db->query($q);
 
 ?>
 

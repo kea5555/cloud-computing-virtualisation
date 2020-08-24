@@ -7,9 +7,9 @@ $db_passwd = 'insecure_db_pw';
 
 $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
-$connection = new PDO($pdo_dsn, $db_user, $db_passwd);
+$db = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-if(!$connection){
+if(!$db){
     die("Connection failed: ");
 }
 
