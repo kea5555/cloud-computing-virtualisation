@@ -10,11 +10,6 @@ Vagrant.configure("2") do |config|
   # bit of time by using a cached copy.)
   config.vm.box = "ubuntu/xenial64"
 
-  # this is a form of configuration not seen earlier in our use of
-  # Vagrant: it defines a particular named VM, which is necessary when
-  # your Vagrantfile will start up multiple interconnected VMs. I have
-  # called this first VM "webserver" since I intend it to run the
-  # webserver (unsurprisingly...).
   config.vm.define "webserver" do |webserver|
 
     # These are options specific to the webserver VM
@@ -58,16 +53,22 @@ Vagrant.configure("2") do |config|
   config.vm.define "admin" do |admin|
 
     # The name of the server
-    dbserver.vm.hostname = "admin"
+    admin.vm.hostname = "admin"
+
+    # This type of port forwarding has been discussed elsewhere in
+    # labs, but recall that it means that our host computer can
+    # connect to IP address 127.0.0.1 port 8081, and that network
+    # request will reach our webserver VM's port 80.
+    #webserver.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
 
     # The VMs ip address
-    dbserver.vm.network "private_network", ip: "192.168.2.13"
+    admin.vm.network "private_network", ip: "192.168.2.13"
 
     # This is needed if the project is being run on lab computers
-    dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    admin.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
     
     # Link to the file that contains the shell commands
-    dbserver.vm.provision "shell", path: "admin.sh"
+    admin.vm.provision "shell", path: "admin.sh"
   end
 
 end
