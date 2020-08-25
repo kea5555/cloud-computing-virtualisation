@@ -5,10 +5,11 @@
 body {
 	font-size: 120%;
 	background: #F8F8FF;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 .header {
-	width: 30%;
+	width: 50%;
 	margin: 50px auto 0px;
 	color: white;
 	background: #5F9EA0;
@@ -19,7 +20,7 @@ body {
 	padding: 20px;
 }
 form, .content {
-	width: 30%;
+	width: 50%;
 	margin: 0px auto;
 	padding: 20px;
 	border: 1px solid #B0C4DE;
@@ -56,7 +57,7 @@ form, .content {
 	margin: 0px auto; 
 	padding: 10px; 
 	border: 1px solid #a94442; 
-	color: #a94442; 
+	color: #a94442;
 	background: #f2dede; 
 	border-radius: 5px; 
 	text-align: left;
@@ -67,3 +68,36 @@ form, .content {
 	border: 1px solid #3c763d;
 	margin-bottom: 20px;
 }
+
+.inline {
+	display: inline;
+}
+
+.inline a{
+	float: right;
+	text-decoration: none;
+	color: #000000;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 15px;
+  }
+  
+table td, table th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+  
+  table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  table tr:hover {background-color: #ddd;}
+  
+  table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #5F9EA0;
+	color: white;
+  }

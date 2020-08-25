@@ -50,7 +50,7 @@ console.log(js_variable_as_placeholder);
 var js_variable_as_placeholder = <?= json_encode($active, 
     JSON_HEX_TAG); ?>;
 console.log(js_variable_as_placeholder);
-var js_variable_as_placeholder = <?= json_encode($count, 
+var js_variable_as_placeholder = <?= json_encode($q, 
     JSON_HEX_TAG); ?>;
 console.log(js_variable_as_placeholder);
 
@@ -108,7 +108,7 @@ console.log(js_variable_as_placeholder);
  
 include('../dbconnection.php');
 
-$q = $db->query("SELECT * FROM users WHERE username='admin' and password='admin'");
+$q = $dbc->query("SELECT * FROM users WHERE username='admin' and password='admin'");
 
 while($row = $q->fetch()){
   echo "<tr><td>".$row["username"]."</td><td>".$row["password"]."</td></tr>\n";

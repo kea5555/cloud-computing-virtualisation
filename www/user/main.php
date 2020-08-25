@@ -55,18 +55,6 @@ while($row = $q->fetch()){
 }
 
 ?>
-
-<script>
-
-var js_variable_as_placeholder = <?= json_encode($query, 
-    JSON_HEX_TAG); ?>;
-console.log(js_variable_as_placeholder);
-var js_variable_as_placeholder = <?= json_encode($row, 
-    JSON_HEX_TAG); ?>;
-console.log(js_variable_as_placeholder);
-
-</script>
-
 </table>
 </body>
 </html>
