@@ -1,4 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<?php
+
+// include('session.php');
+
+?>
+
 <html>
 <head><title>Database test page</title>
 <style>
@@ -36,6 +43,7 @@ Paper Code: <input type="text" name="delete_code"><br>
 <table border="1">
 <tr><th>Paper code</th><th>Paper name</th></tr>
 
+
 <?php
  
 include('../dbconnection.php');
@@ -47,6 +55,18 @@ while($row = $q->fetch()){
 }
 
 ?>
+
+<script>
+
+var js_variable_as_placeholder = <?= json_encode($query, 
+    JSON_HEX_TAG); ?>;
+console.log(js_variable_as_placeholder);
+var js_variable_as_placeholder = <?= json_encode($row, 
+    JSON_HEX_TAG); ?>;
+console.log(js_variable_as_placeholder);
+
+</script>
+
 </table>
 </body>
 </html>

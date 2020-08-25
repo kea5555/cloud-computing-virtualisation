@@ -1,10 +1,11 @@
 CREATE TABLE users (
-  email VARCHAR(20) NOT NULL,
+  user_id VARCHAR(7) NOT NULL,
+  username VARCHAR(20) NOT NULL,
   password VARCHAR(30) NOT NULL,
-  PRIMARY KEY (email)
+  PRIMARY KEY (user_id)
 );
 
-INSERT INTO users VALUES ('admin','admin');
+INSERT INTO users VALUES ('1234567','admin','admin');
 
 CREATE TABLE papers (
   code varchar(7),
