@@ -1,16 +1,18 @@
 <?php
 
 $db_host   = '192.168.2.12';
-$db_name   = 'fvision';
-$db_user   = 'webuser';
-$db_passwd = 'insecure_db_pw';
+$db_name   = 'subscription';
+$db_user   = 'admin';
+$db_passwd = 'admin';
 
-$pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+// $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
-$db = new PDO($pdo_dsn, $db_user, $db_passwd);
+// $db = new PDO($pdo_dsn, $db_user, $db_passwd);
+
+$db = new mysqli($db_host, $db_user, $db_passwd, $db_name);
 
 if(!$db){
-    die("Connection failed: ");
+    die("Connection failed: " . mysqli_connect_error);
 }
 
 ?>
