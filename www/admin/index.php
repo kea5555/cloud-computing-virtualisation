@@ -61,9 +61,13 @@
 				<!-- TODO funcitoning delete button, possibly add an edit button -->
 			</tr>
 			<?php
+				// Include file to connect to database with the $db variable
 				include("../dbconnection.php");
+				// The sql query
 				$sql1 = "SELECT * FROM subscribers";
+				// Search the database with the query and save results in the variable $results
 				$result1 = $db->query($sql1);
+				// fetch a sinle row from the results
 				while($row = $result1->fetch_assoc()){
 					$nid = $row["newsletter_id"];
 					$sql2 = "SELECT * FROM newsletters WHERE newsletter_id='$nid'";
