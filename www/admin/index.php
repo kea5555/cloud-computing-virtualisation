@@ -51,40 +51,46 @@
 				</h3>
 			</div>
 		<?php endif ?>
-
-	
-<table>
-<tr><th>ID</th><th>Name</th><th>Email</th><th>Subsrcibed</th></tr>
-
-<?php
- 
-include('../dbconnection.php');
-
-$sql = "SELECT * FROM subscribers";
-
-$results = $mysqli_query($db, $sql);
-
-while($row = $results->fetch()){
-  echo "<tr><td>".$row["subscriber_ID"]."</td><td>".$row["sub_name"]."</td><td>".$row["sub_email"]."</td><td>".$row["newsletter_id"]."</td></tr>\n";
-}
-
-
-
-?>
-
-
-
-</table>
-
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Subsrcibed</th>
+				<th>Delete</th>
+				<!-- TODO funcitoning delete button, possibly add an edit button -->
+			</tr>
+			<?php
+				include("../dbconnection.php");
+				$sql1 = "SELECT * FROM subscribers";
+				$result1 = $db->query($sql1);
+				while($row = $result1->fetch_assoc()){
+					$nid = $row["newsletter_id"];
+					$sql2 = "SELECT * FROM newsletters WHERE newsletter_id='$nid'";
+					$result2 = $db->query($sql2);
+					while($nrow = $result2->fetch_assoc()) {
+						echo "<tr><td>".$row["subscribers_id"]."</td><td>".$row["sub_name"]."</td><td>".$row["sub_email"]."</td><td>".$nrow["news_name"]." Newsletter"."</td></tr>\n";
+					  }
+				}
+			?>
+		</table>
 	</div>
 
 
 		
 </body>
 </html>
-
 <script>
-var js_variable_as_placeholder = <?= json_encode($sql, 
+var js_variable_as_placeholder = <?= json_encode($nid, 
     JSON_HEX_TAG); ?>;
 console.log(js_variable_as_placeholder);
+
+var js_variable_as_placeholder = <?= json_encode($qu2, 
+    JSON_HEX_TAG); ?>;
+console.log(js_variable_as_placeholder);
+
+var js_variable_as_placeholder = <?= json_encode($nname, 
+    JSON_HEX_TAG); ?>;
+console.log(js_variable_as_placeholder);
+
 </script>

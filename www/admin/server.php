@@ -5,6 +5,7 @@ include("../dbconnection.php");
 	// link from where i got this login/register application from, he states its okay to use other peopls
 	// code as long as we state it.
 	// https://codewithawa.com/posts/complete-user-registration-system-using-php-and-mysql-database
+	// https://www.w3schools.com/php/php_mysql_select.asp
 
 
 	// variable declaration
@@ -76,3 +77,14 @@ include("../dbconnection.php");
 	}
 
 ?>
+
+<script>
+var js_variable_as_placeholder = <?= json_encode($query, 
+    JSON_HEX_TAG); ?>;
+console.log(js_variable_as_placeholder);
+
+var js_variable_as_placeholder = <?= json_encode($results, 
+    JSON_HEX_TAG); ?>;
+console.log(js_variable_as_placeholder);
+
+</script>
