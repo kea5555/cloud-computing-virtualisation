@@ -1,5 +1,8 @@
 <?php
 
+// This is the database connection, the file can be included in php code that needs to 
+// connect to the database. To connect use the reference '$db'.
+
 $db_host   = '192.168.2.12';
 $db_name   = 'subscriptions';
 $db_user   = 'admin';

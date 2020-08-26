@@ -1,5 +1,11 @@
 <?php include('server.php') ?>
 <!DOCTYPE html>
+
+
+<!-- 
+	The register page, the php logic is contained in the server.php file.
+ -->
+
 <html>
 <head>
 	<title>Registration system PHP and MySQL</title>

@@ -13,6 +13,13 @@
 	}
 
 ?>
+
+<!-- 
+	The main page, it holds the table that displays the subscribers and their data,
+	this is the page that an admin is brought to after signing in, and from here they 
+	can add/remove subscribers from the list.
+ -->
+
 <!DOCTYPE html>
 <html>
 <head>

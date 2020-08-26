@@ -2,6 +2,8 @@
 include("../dbconnection.php");
 	session_start();
 
+	// link from where i got this login/register application from, he states its okay to use other peopls
+	// code as long as we state it.
 	// https://codewithawa.com/posts/complete-user-registration-system-using-php-and-mysql-database
 
 
@@ -58,6 +60,7 @@ include("../dbconnection.php");
 		}
 
 		if (count($errors) == 0) {
+			// Password hash function
 			$password = md5($password);
 			$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
 			$results = mysqli_query($db, $query);
