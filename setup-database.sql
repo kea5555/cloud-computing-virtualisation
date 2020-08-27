@@ -1,7 +1,7 @@
 CREATE TABLE users (
-  id varchar(7) NOT NULL ,
-  username VARCHAR(20) NOT NULL,
-  email VARCHAR(20) NOT NULL,
+  id varchar(11) NOT NULL ,
+  username VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
 );
