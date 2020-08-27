@@ -28,3 +28,4 @@ CREATE TABLE subscribers (
 );
 
 INSERT INTO subscribers VALUES ('902375','Ryan','ryan@email.com','54909');
+INSERT INTO subscribers VALUES ('345785','Kayla','maim.montgomery@gmail.com','456564');
