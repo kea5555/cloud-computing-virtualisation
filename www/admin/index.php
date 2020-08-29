@@ -75,7 +75,7 @@ if (isset($_GET['logout'])) {
 				<th>Name</th>
 				<th>Email</th>
 				<th>Subsrcibed</th>
-				<th>Delete</th>
+				<th>Action</th>
 				<!-- TODO funcitoning delete button, possibly add an edit button -->
 			</tr>
 			<?php
