@@ -56,8 +56,13 @@ if (isset($_POST['reg_user'])) {
 
 // LOGIN USER
 if (isset($_POST['login_user'])) {
+<<<<<<< HEAD
 	$username = mysqli_real_escape_string($conn, $_POST['username1']);
 	$password = mysqli_real_escape_string($conn, $_POST['password1']);
+=======
+	$username = mysqli_real_escape_string($db, $_POST['username1']);
+	$password = mysqli_real_escape_string($db, $_POST['password1']);
+>>>>>>> b801eb9ea9f4541a13eec4e0c3da722767a5acdd
 
 	if (empty($username)) {
 		array_push($errors, "Username is required");
@@ -70,7 +75,11 @@ if (isset($_POST['login_user'])) {
 		// Password hash function
 		$password = md5($password);
 		$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+<<<<<<< HEAD
 		$results = mysqli_query($conn, $query);
+=======
+		$results = mysqli_query($db, $query);
+>>>>>>> b801eb9ea9f4541a13eec4e0c3da722767a5acdd
 
 		if (mysqli_num_rows($results) == 1) {
 			$_SESSION['username'] = $username;
