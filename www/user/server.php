@@ -40,7 +40,7 @@ if (isset($_POST['reg_user'])) {
 					  VALUES('$id', '$name', '$email', '$news')";
     $success = $conn->query($query2);
     // Set the banner to say the successfully sign up
-    $_SESSION['success'] = "You are succesfully signed up";
+    $_SESSION['success'] = "You are successfully signed up";
 	}
 }
 ?>
