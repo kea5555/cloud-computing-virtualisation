@@ -35,13 +35,12 @@ if (isset($_POST['reg_user'])) {
 	if (count($errors) == 0) {
 		foreach($_POST['newsletter'] as $value){
 			$news = rtrim($value, ",");
-		}
-		 
+    }
 		$query2 = "INSERT INTO subscribers (subscribers_id, sub_name, sub_email, newsletter) 
 					  VALUES('$id', '$name', '$email', '$news')";
-		$success = $conn->query($query2);
-		// $success1 = mysqli_query($conn, $query2);
-		header('location: index.php');
+    $success = $conn->query($query2);
+    // Set the banner to say the successfully sign up
+    $_SESSION['success'] = "You are succesfully signed up";
 	}
 }
 ?>

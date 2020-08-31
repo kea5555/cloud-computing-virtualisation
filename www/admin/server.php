@@ -52,7 +52,11 @@ if (isset($_POST['reg_user'])) {
 	}
 }
 
-// ... 
+//DELETE USER
+if (isset($_POST['del'])) {
+	$delId = $row['subscribers_id'];
+	mysqli_query($conn, "DELETE FROM subscribers WHERE subscribers_id=$delId");
+}
 
 // LOGIN USER
 if (isset($_POST['login_user'])) {
@@ -82,37 +86,22 @@ if (isset($_POST['login_user'])) {
 	}
 }
 
-// Edit user
-if (isset($_POST['update'])) {
-	$id = $_POST['id'];
-	$name = $_POST['name'];
-	$address = $_POST['address'];
+// // Edit user
+// if (isset($_POST['update'])) {
+// 	$id = $_POST['id'];
+// 	$name = $_POST['name'];
+// 	$address = $_POST['address'];
 
-	mysqli_query($db, "UPDATE info SET name='$name', address='$address' WHERE id=$id");
-	$_SESSION['message'] = "Address updated!";
-	header('location: index.php');
-}
-
-//Delete user
-if (isset($_GET['del'])) {
-	$id = $_GET['del'];
-	mysqli_query($db, "DELETE FROM info WHERE id=$id");
-	$_SESSION['message'] = "Address deleted!"; 
-	header('location: index.php');
-}
-
+// 	mysqli_query($db, "UPDATE info SET name='$name', address='$address' WHERE id=$id");
+// 	$_SESSION['message'] = "Address updated!";
+// 	header('location: index.php');
+// }
 
 ?>
 
 <script>
 	var js_variable_as_placeholder = <?= json_encode(
-											$query,
-											JSON_HEX_TAG
-										); ?>;
-	console.log(js_variable_as_placeholder);
-
-	var js_variable_as_placeholder = <?= json_encode(
-											$results,
+											$delId,
 											JSON_HEX_TAG
 										); ?>;
 	console.log(js_variable_as_placeholder);

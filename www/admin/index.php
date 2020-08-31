@@ -92,10 +92,10 @@ if (isset($_GET['logout'])) {
 				<td>".$row['subscribers_id']."</td>
 				<td>".$row['sub_name']."</td>
 				<td>".$row['sub_email']."</td>
-				<td>".$row['news_name']."Newsletter"."</td>
+				<td>".$row['newsletter']."</td>
 				<td>
 				<div class='has-text-centered'>
-				<button class='button'>Remove</button>
+				<button class='button' method='post' 'action='server.php' type='submit' name='del'>Remove</button>
 				</div>
 				</td>
 				</tr>\n";
