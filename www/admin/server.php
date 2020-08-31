@@ -16,10 +16,11 @@ $errors = array();
 $_SESSION['success'] = "";
 $update = false;
 
-//DELETE USER
-if (isset($_POST['del'])) {
-	$delId = $row['subscribers_id'];
-	mysqli_query($conn, "DELETE FROM subscribers WHERE subscribers_id=$delId");
+if (isset($_GET['del'])) {
+	$id = $_GET['del'];
+	mysqli_query($db, "DELETE FROM subscribers WHERE id=$id");
+	$_SESSION['message'] = "Address deleted!"; 
+	header('location: index.php');
 }
 
 // LOGIN USER
@@ -50,15 +51,15 @@ if (isset($_POST['login_user'])) {
 	}
 }
 
-// // Edit user
-// if (isset($_POST['update'])) {
-// 	$id = $_POST['id'];
-// 	$name = $_POST['name'];
-// 	$address = $_POST['address'];
+// Edit user
+if (isset($_POST['edit'])) {
+	$id = $_POST['id'];
+	$name = $_POST['name'];
+	$address = $_POST['address'];
 
-// 	mysqli_query($db, "UPDATE info SET name='$name', address='$address' WHERE id=$id");
-// 	$_SESSION['message'] = "Address updated!";
-// 	header('location: index.php');
-// }
+	mysqli_query($db, "UPDATE info SET name='$name', address='$address' WHERE id=$id");
+	$_SESSION['message'] = "Address updated!";
+	header('location: index.php');
+}
 
 ?>

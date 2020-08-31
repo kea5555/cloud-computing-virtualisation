@@ -75,6 +75,7 @@ if (isset($_GET['logout'])) {
 				<th>Name</th>
 				<th>Email</th>
 				<th>Subsrcibed</th>
+				<th>Edit</th>
 				<th>Remove</th>
 			</tr>
 			<?php
@@ -93,10 +94,19 @@ if (isset($_GET['logout'])) {
 				<td>".$row['sub_name']."</td>
 				<td>".$row['sub_email']."</td>
 				<td>".$row['newsletter']."</td>
-				<td>
-				<div class='has-text-centered'>
-				<button class='button' method='post' 'action='server.php' type='submit' name='del'>Remove</button>
-				</div>
+				<td>"
+				?>
+				<a href="server.php?edit=<?php echo $row['subscribers_id']; ?>">Edit</a>
+				<?php
+				echo
+				"</td>
+				<td>"
+				?>
+				<a href="server.php?del=<?php echo $row['subscribers_id']; ?>">Delete</a>
+				<?php
+				echo
+				// <button class='button' method='post' 'action='server.php' type='submit' name='del'>Remove</button>
+				"
 				</td>
 				</tr>\n";
 			} ?>
