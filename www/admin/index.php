@@ -112,28 +112,5 @@ if (isset($_GET['logout'])) {
 			} ?>
 		</table>
 	</div>
-
-
-
 </body>
-
 </html>
-<script>
-	var js_variable_as_placeholder = <?= json_encode(
-											$sql,
-											JSON_HEX_TAG
-										); ?>;
-	console.log(js_variable_as_placeholder);
-
-	var js_variable_as_placeholder = <?= json_encode(
-											$result,
-											JSON_HEX_TAG
-										); ?>;
-	console.log(js_variable_as_placeholder);
-
-	var js_variable_as_placeholder = <?= json_encode(
-											$row,
-											JSON_HEX_TAG
-										); ?>;
-	console.log(js_variable_as_placeholder);
-</script>
