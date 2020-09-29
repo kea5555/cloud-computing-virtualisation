@@ -1,16 +1,16 @@
 <?php
-session_start();
+// session_start();
 
-if (!isset($_SESSION['username'])) {
-	$_SESSION['msg'] = "You must log in first";
-	header('location: login.php');
-}
+// if (!isset($_SESSION['username'])) {
+// 	$_SESSION['msg'] = "You must log in first";
+// 	header('location: login.php');
+// }
 
-if (isset($_GET['logout'])) {
-	session_destroy();
-	unset($_SESSION['username']);
-	header("location: login.php");
-}
+// if (isset($_GET['logout'])) {
+// 	session_destroy();
+// 	unset($_SESSION['username']);
+// 	header("location: login.php");
+// }
 
 ?>
 
@@ -37,38 +37,22 @@ if (isset($_GET['logout'])) {
 
 
 		<!-- logged in user information -->
-		<?php if (isset($_SESSION['username'])) : ?>
-			<p class='inline'>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+		<?php //if (isset($_SESSION['username'])) : ?>
+			<p class='inline'>Welcome <strong><?php //echo $_SESSION['username']; ?></strong></p>
 			<p class='inline'> <a href="index.php?logout='1'">logout</a> </p>
-		<?php endif ?>
-
-		<!-- user edits their information
-		<?php
-		// if (isset($_GET['edit'])) {
-		// 	$id = $_GET['edit'];
-		// 	$update = true;
-		// 	$record = mysqli_query($db, "SELECT * FROM newsletters WHERE newsletter_id='$nid'");
-
-		// 	if (count($record) == 1) {
-		// 		$n = mysqli_fetch_array($record);
-		// 		$name = $n['subscribers_id'];
-		// 		$address = $n['sub_name'];
-		// 	}
-		// }
-		?> -->
-
+		<?php //endif ?>
 
 		<!-- notification message -->
-		<?php if (isset($_SESSION['success'])) : ?>
-			<div class="error success">
+		<?php //if (isset($_SESSION['success'])) : ?>
+			<!-- <div class="error success">
 				<h3>
 					<?php
-					echo $_SESSION['success'];
-					unset($_SESSION['success']);
+					//echo $_SESSION['success'];
+					//unset($_SESSION['success']);
 					?>
 				</h3>
-			</div>
-		<?php endif ?>
+			</div> -->
+		<?php //endif ?>
 		<table>
 			<tr>
 				<th>ID</th>
@@ -80,36 +64,36 @@ if (isset($_GET['logout'])) {
 			</tr>
 			<?php
 			// Include file to connect to database with the $conn variable
-			include("../dbconnection.php");
+			//include("../dbconnection.php");
 			// mysqli_refresh($conn, MYSQLI_REFRESH_TABLES);
 			// The sql query
-			$sql = "SELECT * FROM subscribers";
+			//$sql = "SELECT * FROM subscribers";
 			// Search the database with the query and save results in the variable $results
-			$result = mysqli_query($conn, $sql);
+			//$result = mysqli_query($conn, $sql);
 			// $result = $conn->query($sql);
-			while ($row = mysqli_fetch_assoc($result)) { 
-				echo 
-				"<tr>
-				<td>".$row['subscribers_id']."</td>
-				<td>".$row['sub_name']."</td>
-				<td>".$row['sub_email']."</td>
-				<td>".$row['newsletter']."</td>
-				<td>"
+			// while ($row = mysqli_fetch_assoc($result)) { 
+			// 	echo 
+			// 	"<tr>
+			// 	<td>".$row['subscribers_id']."</td>
+			// 	<td>".$row['sub_name']."</td>
+			// 	<td>".$row['sub_email']."</td>
+			// 	<td>".$row['newsletter']."</td>
+			// 	<td>"
 				?>
-				<a href="server.php?edit=<?php echo $row['subscribers_id']; ?>">Edit</a>
+				<!-- <a href="server.php?edit=<?php echo $row['subscribers_id']; ?>">Edit</a> -->
 				<?php
-				echo
-				"</td>
-				<td>"
+				// echo
+				// "</td>
+				// <td>"
 				?>
-				<a href="server.php?del=<?php echo $row['subscribers_id']; ?>">Delete</a>
+				<!-- <a href="server.php?del=<?php echo $row['subscribers_id']; ?>">Delete</a> -->
 				<?php
-				echo
+				// echo
 				// <button class='button' method='post' 'action='server.php' type='submit' name='del'>Remove</button>
 				"
 				</td>
 				</tr>\n";
-			} ?>
+			// } ?>
 		</table>
 	</div>
 </body>

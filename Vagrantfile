@@ -1,76 +1,106 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# A Vagrantfile to set up two VMs, a webserver and a database server,
-# connected together using an internal network with manually-assigned
-# IP addresses for the VMs.
+class Hash
+  def slice(*keep_keys)
+    h = {}
+    keep_keys.each { |key| h[key] = fetch(key) if has_key?(key) }
+    h
+  end unless Hash.method_defined?(:slice)
+  def except(*less_keys)
+    slice(*keys - less_keys)
+  end unless Hash.method_defined?(:except)
+end
 
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
 Vagrant.configure("2") do |config|
-  # (We have used this box previously, so reusing it here should save a
-  # bit of time by using a cached copy.)
-  config.vm.box = "ubuntu/xenial64"
+  # Online Vagrantfile documentation is at https://docs.vagrantup.com.
+
+  # The AWS provider does not actually need to use a Vagrant box file.
+  config.vm.box = "dummy"
+
+  config.vm.provider :aws do |aws, override|
+    # We will gather the data for these three aws configuration
+    # parameters from environment variables (more secure than
+    # committing security credentials to your Vagrantfile).
+    #
+    # aws.access_key_id = "YOUR KEY"
+    # aws.secret_access_key = "YOUR SECRET KEY"
+    # aws.session_token = "SESSION TOKEN"
+
+    # The region for Amazon Educate is fixed.
+    aws.region = "us-east-1"
+
+    # These options force synchronisation of files to the VM's
+    # /vagrant directory using rsync, rather than using trying to use
+    # SMB (which will not be available by default).
+    override.nfs.functional = false
+    override.vm.allowed_synced_folder_types = :rsync
+
+    # Following the lab instructions should lead you to provide values
+    # appropriate for your environment for the configuration variable
+    # assignments preceded by double-hashes in the remainder of this
+    # :aws configuration section.
+
+    # The keypair_name parameter tells Amazon which public key to use.
+    aws.keypair_name = "cosc349-assign"
+    # The private_key_path is a file location in your macOS account
+    # (e.g., ~/.ssh/something).
+    override.ssh.private_key_path = "~/.ssh/cosc349-assign.pem"
+
+    # Choose your Amazon EC2 instance type (t2.micro is cheap).
+    aws.instance_type = "t2.micro"
+
+    # You need to indicate the list of security groups your VM should
+    # be in. Each security group will be of the form "sg-...", and
+    # they should be comma-separated (if you use more than one) within
+    # square brackets.
+    #
+    aws.security_groups = ["sg-0c704e6d99aefdb4f","sg-0920cdfe619a6b33b"]
+
+    # For Vagrant to deploy to EC2 for Amazon Educate accounts, it
+    # seems that a specific availability_zone needs to be selected
+    # (will be of the form "us-east-1a"). The subnet_id for that
+    # availability_zone needs to be included, too (will be of the form
+    # "subnet-...").
+    aws.availability_zone = "us-east-1a"
+    aws.subnet_id = "subnet-149c4772"
+
+    # You need to chose the AMI (i.e., hard disk image) to use. This
+    # will be of the form "ami-...".
+    # 
+    # If you want to use Ubuntu Linux, you can discover the official
+    # Ubuntu AMIs: https://cloud-images.ubuntu.com/locator/ec2/
+    #
+    # You need to get the region correct, and the correct form of
+    # configuration (probably amd64, hvm:ebs-ssd, hvm).
+    #
+    aws.ami = "ami-0f40c8f97004632f9"
+
+    # If using Ubuntu, you probably also need to uncomment the line
+    # below, so that Vagrant connects using username "ubuntu".
+    override.ssh.username = "ubuntu"
+  end
 
   config.vm.define "webserver" do |webserver|
-
-    # These are options specific to the webserver VM
     webserver.vm.hostname = "webserver"
-    
-    # This type of port forwarding has been discussed elsewhere in
-    # labs, but recall that it means that our host computer can
-    # connect to IP address 127.0.0.1 port 8081, and that network
-    # request will reach our webserver VM's port 80.
-    webserver.vm.network "forwarded_port", guest: 80, host: 8090, host_ip: "127.0.0.1"
-    
-    # The VMs ip address
-    webserver.vm.network "private_network", ip: "192.168.2.11"
-
-    # This is needed if the project is being run on lab computers
-    webserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-
-    # Link to the file that contains the shell commands
     webserver.vm.provision "shell", path: "webserver.sh"
   end
 
-  # Here is the section for defining the database server, which I have
-  # named "dbserver".
-  config.vm.define "dbserver" do |dbserver|
-
-    # The name of the server
-    dbserver.vm.hostname = "dbserver"
-
-    # The VMs ip address
-    dbserver.vm.network "private_network", ip: "192.168.2.12"
-
-    # This is needed if the project is being run on lab computers
-    dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-    
-    # Link to the file that contains the shell commands
-    dbserver.vm.provision "shell", path: "dbserver.sh"
-  end
-
-  # Here is the section for defining the admin server, which I have
-  # named "admin".
   config.vm.define "admin" do |admin|
-
-    # The name of the server
     admin.vm.hostname = "admin"
-
-    # This type of port forwarding has been discussed elsewhere in
-    # labs, but recall that it means that our host computer can
-    # connect to IP address 127.0.0.1 port 8081, and that network
-    # request will reach our webserver VM's port 80.
-    admin.vm.network "forwarded_port", guest: 80, host: 8091, host_ip: "127.0.0.1"
-
-    # The VMs ip address
-    admin.vm.network "private_network", ip: "192.168.2.13"
-
-    # This is needed if the project is being run on lab computers
-    admin.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-    
-    # Link to the file that contains the shell commands
     admin.vm.provision "shell", path: "admin.sh"
   end
 
-end
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get install -y apache2
+  SHELL
 
-#  LocalWords:  webserver xenial64
+end
