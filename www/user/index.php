@@ -1,4 +1,4 @@
-<?php //include('server.php') ?>
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <!-- 
     The main user page, it will hold the user registration form to sign up to a newsletter.
