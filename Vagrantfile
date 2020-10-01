@@ -46,10 +46,10 @@ Vagrant.configure("2") do |config|
     # :aws configuration section.
 
     # The keypair_name parameter tells Amazon which public key to use.
-    aws.keypair_name = "cosc349-assign"
+    aws.keypair_name = "cloud-key"
     # The private_key_path is a file location in your macOS account
     # (e.g., ~/.ssh/something).
-    override.ssh.private_key_path = "~/.ssh/cosc349-assign.pem"
+    override.ssh.private_key_path = "~/.ssh/cloud-key.pem"
 
     # Choose your Amazon EC2 instance type (t2.micro is cheap).
     aws.instance_type = "t2.micro"
@@ -85,14 +85,14 @@ Vagrant.configure("2") do |config|
     override.ssh.username = "ubuntu"
   end
 
-  config.vm.define "webserver" do |webserver|
-    webserver.vm.hostname = "webserver"
-    webserver.vm.provision "shell", path: "webserver.sh"
-  end
+  # config.vm.define "webserver" do |webserver|
+  #   webserver.vm.hostname = "webserver"
+  #   webserver.vm.provision "shell", path: "webserver.sh"
+  # end
 
-  config.vm.define "admin" do |admin|
-    admin.vm.hostname = "admin"
-    admin.vm.provision "shell", path: "admin.sh"
-  end
+  # config.vm.define "admin" do |admin|
+  #   admin.vm.hostname = "admin"
+  #   admin.vm.provision "shell", path: "admin.sh"
+  # end
 
 end
