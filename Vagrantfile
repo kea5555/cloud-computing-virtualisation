@@ -59,7 +59,7 @@ Vagrant.configure("2") do |config|
     # they should be comma-separated (if you use more than one) within
     # square brackets.
     #
-    aws.security_groups = ["sg-0c704e6d99aefdb4f","sg-0920cdfe619a6b33b"]
+    aws.security_groups = ["sg-0e40c10ddecf85d78","sg-0920cdfe619a6b33b"]
 
     # For Vagrant to deploy to EC2 for Amazon Educate accounts, it
     # seems that a specific availability_zone needs to be selected
